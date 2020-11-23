@@ -16,7 +16,7 @@ export default {
                 this.carregandoEixos = false;
                 this.eixos = data.eixos || []
                 // this.eixos = [{ id: 1, nome: 'A'}]
-            // })
+            })
         }
     }
 }
