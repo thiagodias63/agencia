@@ -1,4 +1,4 @@
-import EixoService from '@/services/eixo.service'
+import EixoService from '../../services/eixos.service'
 export default {
     data() {
         return {
