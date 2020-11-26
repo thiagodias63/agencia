@@ -71,8 +71,8 @@
       <div class="text-center">
         <p>Remover o eixo: <span style="font-weight: bold">{{ eixoSelecionado.nome }}</span> </p>
         <br>
-        <button @click="fecharModal" class="btn btn-default btn-sm">Cancelar</button>
-        <button @click="confirmarRemocao" class="btn btn-danger btn-sm">Remover</button>
+        <button :disabled="isSending" @click="fecharModal" class="btn btn-default btn-sm">Cancelar</button>
+        <button :disabled="isSending" @click="confirmarRemocao" class="btn btn-danger btn-sm">Remover</button>
       </div>
     </modal>
   </div>
@@ -80,7 +80,7 @@
 
 <script>
 import Loader from '@/components/loader'
-import EixosService from '@/services/eixos.service'
+import EixoService from '@/services/eixos.service'
 export default {
   title: 'Eixos - Lista',
   data() {
@@ -88,6 +88,7 @@ export default {
       isLoading: false,
       eixos: [],
       isRemoving: false,
+      isSending: false,
       eixoSelecionado: {},
     };
   },
@@ -97,7 +98,7 @@ export default {
   methods: {
     carregarEixos() {
       this.isLoading = true;
-      EixosService.getAll().then((data) => {
+      EixoService.getAll().then((data) => {
         this.isLoading = false;
         this.eixos = data.eixos || [];
       })
@@ -107,9 +108,14 @@ export default {
       this.isRemoving = true
     },
     confirmarRemocao() {
-      this.eixoSelecionado = {};
-      this.fecharModal();
-      this.carregarEixos();
+      this.isSending = true;
+      EixoService.remove(this.eixoSelecionado.id).then(() => {
+        this.eixoSelecionado = {};
+        this.fecharModal();
+        this.carregarEixos();
+        this.$toaster.error('Eixo deletado com sucesso!');
+        this.isSending = false;
+      })
     },
     fecharModal() {
       this.eixoSelecionado = {};

@@ -96,6 +96,7 @@ export default {
       isLoading: false,
       projetos: [],
       isRemoving: false,
+      isSending: false,
       projetoSelecionado: {},
     };
   },
@@ -116,9 +117,14 @@ export default {
       this.isRemoving = true
     },
     confirmarRemocao() {
-      this.projetoSelecionado = {};
-      this.fecharModal();
-      this.carregarProjetos();
+      this.isSending = true;
+      ProjetoService.remove(this.projetoSelecionado.id).then(() => {
+        this.projetoSelecionado = {};
+        this.fecharModal();
+        this.carregarProjetos();
+        this.$toaster.error('Projeto deletado com sucesso!');
+        this.isSending = false;
+      })
     },
     fecharModal() {
       this.projetoSelecionado = {};

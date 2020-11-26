@@ -9,12 +9,12 @@ export default {
         return axios.get('' + id)
     },
 
-    save(eixo) {
-        return axios.post('', { eixo })
+    save(funcionario) {
+        return axios.post('', { funcionario })
     },
 
-    edit(id) {
-        return axios.put('' + id)
+    edit(id, funcionario) {
+        return axios.put('' + id, { funcionario })
     },
 
     remove(id) {

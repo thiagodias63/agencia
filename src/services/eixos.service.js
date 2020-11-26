@@ -13,8 +13,8 @@ export default {
         return axios.post('', { eixo })
     },
 
-    edit(id) {
-        return axios.put('' + id)
+    edit(id, eixo) {
+        return axios.put('' + id, { eixo })
     },
 
     remove(id) {

@@ -94,7 +94,12 @@ export default {
           if (this.$v.$invalid)  {
             return false;
           }
-          this.isSending = true
+          this.isSending = true;
+          FuncionarioService.edit(this.funcionario.id, this.funcionario).then(() => {
+            this.$toaster.success('Funcionário editado com sucesso!');
+            this.isSending = false;
+            this.$router.push('/funcionarios');
+          })
       }
   },
   validations: {

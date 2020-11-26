@@ -60,7 +60,7 @@
 <script>
 import { required } from 'vuelidate/lib/validators'
 import Loader from '@/components/loader'
-import EixosService from '@/services/eixos.service'
+import EixoService from '@/services/eixos.service'
 export default {
   title: 'Eixos - Edição',
   created() {
@@ -84,17 +84,22 @@ export default {
     carregarEixo() {
       this.eixo.id = this.$route.params.id
       this.isLoading = true
-      EixosService.getOne(this.eixo.id).then(() => {
+      EixoService.getOne(this.eixo.id).then(() => {
         this.isLoading = false;
         this.eixo.nome = 'A'
       },2000)
     },
       salvar() {
-          this.isSubmited = true
+          this.isSubmited = true;
           if (this.$v.$invalid)  {
             return false;
           }
-          this.isSending = true
+          this.isSending = true;
+          EixoService.edit(this.funcionario.id, this.funcionario).then(() => {
+            this.$toaster.success('Eixo editado com sucesso!');
+            this.isSending = false
+            this.$router.push('/eixos')
+          })
       }
   },
   validations: {

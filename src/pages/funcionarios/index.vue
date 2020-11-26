@@ -88,6 +88,7 @@ export default {
       isLoading: false,
       funcionarios: [],
       isRemoving: false,
+      isSending: false,
       funcionarioSelecionado: {},
     };
   },
@@ -107,9 +108,14 @@ export default {
       this.isRemoving = true
     },
     confirmarRemocao() {
-      this.funcionarioSelecionado = {};
-      this.fecharModal();
-      this.carregarFuncionarios();
+      this.isSending = true;
+      FuncionarioService.remove(this.funcionarioSelecionado.id).then(() => {
+        this.funcionarioSelecionado = {};
+        this.fecharModal();
+        this.carregarFuncionarios();
+        this.$toaster.error('Funcionário deletado com sucesso!');
+        this.isSending = false;
+      })
     },
     fecharModal() {
       this.funcionarioSelecionado = {};

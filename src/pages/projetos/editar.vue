@@ -125,6 +125,11 @@ export default {
             return false;
           }
           this.isSending = true
+          ProjetoService.edit(this.eixo.id, this.eixo).then(() => {
+            this.$toaster.success('Projeto editado com sucesso!');
+            this.isSending = false;
+            this.$router.push('/projetos');
+          })
       }
   },
   validations: {

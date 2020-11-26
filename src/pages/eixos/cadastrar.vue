@@ -48,7 +48,7 @@
 
 <script>
 import { required } from 'vuelidate/lib/validators'
-import EixosService from '@/services/eixos.service'
+import EixoService from '@/services/eixos.service'
 export default {
   title: 'Eixos - Cadastro',
   data() {
@@ -66,9 +66,11 @@ export default {
           if (this.$v.$invalid)  {
             return false;
           }
-          this.isSending = true
-          EixosService.save(this.eixo).then(() => {
-            this.isSending = false
+          this.isSending = true;
+          EixoService.save(this.eixo).then(() => {
+            this.$toaster.success('Eixo cadastrado com sucesso!');
+            this.isSending = false;
+            this.$router.push('/eixos')
           })
       }
   },

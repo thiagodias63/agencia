@@ -5,9 +5,11 @@ import router from './router'
 import ArgonDashboard from './plugins/argon-dashboard'
 import Vuelidate from 'vuelidate'
 import titleMixin from './mixins/title.mixin'
+import Toaster from 'v-toaster'
 
 Vue.use(Vuelidate)
 Vue.mixin(titleMixin)
+Vue.use(Toaster, {timeout: 60000})
 
 Vue.config.productionTip = false
 
