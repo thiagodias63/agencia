@@ -35,6 +35,7 @@
   .v-toast.v-toast-warning {
     background: #ffb700;
     border-color: #ffb700;
+    color: black;
   }
   .v-toast.v-toast-info {
     background: #5bc0de;

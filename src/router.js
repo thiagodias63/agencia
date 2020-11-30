@@ -1,11 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import MainLayout from '@/layout/Main'
+import LoginLayout from '@/layout/Login'
 Vue.use(Router)
 
 export default new Router({
   linkExactActiveClass: 'active',
   routes: [
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginLayout,
+    },
     {
       path: '/',
       redirect: 'index',
