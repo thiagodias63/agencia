@@ -68,5 +68,10 @@
       width: 100%;
     }    
   }
-  
+  div.bg-gradient-success {
+    background: linear-gradient(87deg, #000046 0, #1CB5E0 100%) !important;
+  }
+  h1.title {
+    color: white;
+  }
 </style>
