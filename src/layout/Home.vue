@@ -7,8 +7,14 @@
         >
         <template slot="links">
             <sidebar-item :link="{name: 'Home', icon: 'fa fa-home', path: '/'}"/>
-            <sidebar-item :link="{name: 'O Programa', icon: 'fa fa-archive', path: '/programa'}"/>
-            <sidebar-item :link="{name: 'Fale Conosco', icon: 'fa fa-paper-plane', path: '/contato'}"/>
+            <sidebar-item :link="{name: 'Eixos', icon: 'fa fa-certificate', path: '/eixos'}"/>
+            <sidebar-item :link="{name: 'Sobre', icon: 'fa fa-archive', path: '#'}" id="sobre-li" />
+            <sidebar-item v-if="showAbout" class="subitem" :link="{name: 'Contatos', icon: 'fa fa-phone', path: '/contatos'}"/>
+            <sidebar-item v-if="showAbout" class="subitem" :link="{name: 'Editorial', icon: 'fa fa-book', path: '/editorial'}"/>
+            <sidebar-item v-if="showAbout" class="subitem" :link="{name: 'Entidades Participantes', icon: 'fas fa-users', path: '/entidades-participantes'}"/>
+            <sidebar-item v-if="showAbout" class="subitem" :link="{name: 'Modelo de governança', icon: 'fa fa-folder-open', path: '/modelo-de-governanca'}"/>
+            <sidebar-item v-if="showAbout" class="subitem" :link="{name: 'Visão de Futuro', icon: 'fa fa-road', path: '/visao-de-futuro'}"/>
+            <sidebar-item :link="{name: 'Fale Conosco', icon: 'fa fa-paper-plane', path: '/fale-conosco'}"/>
             <sidebar-item :link="{name: 'Admin', icon: 'fa fa-lock', path: '/admin'}"/>
         </template>
         </side-bar>
@@ -30,7 +36,8 @@ export default {
   },
   data() {
     return {
-      sidebarBackground: 'blue' //vue|blue|orange|green|red|primary
+      sidebarBackground: 'blue',
+      showAbout: false
     };
   },
   methods: {
@@ -40,14 +47,24 @@ export default {
       }
     }
   },
+  mounted() {
+    document.querySelector("#sobre-li a").setAttribute("href", "");
+    document.querySelector("#sobre-li").addEventListener('click', () => {
+      this.showAbout = !this.showAbout;
+    })
+  }
 };
 </script>
 <style lang="css">
 .home {
-    width: 100vw;
-    min-height: 100vh;
-    height: 100%;
-    padding: 15vh 15vw;
-    background: linear-gradient(87deg, #000046 0, #1CB5E0 100%) !important;
+  width: 100vw;
+  min-height: 100vh;
+  height: 100%;
+  padding: 15vh 15vw;
+  background: linear-gradient(87deg, #000046 0, #1CB5E0 100%) !important;
+}
+.subitem {
+  margin-left: 12px;
+  
 }
 </style>

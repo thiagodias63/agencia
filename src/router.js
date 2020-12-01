@@ -4,7 +4,7 @@ import AdminLayout from '@/layout/Admin'
 import LoginLayout from '@/layout/Login'
 import HomeLayout from '@/layout/Home'
 import Logout from '@/pages/logout'
-import Eixo from '@/pages/eixo'
+import Home from '@/pages/home'
 Vue.use(Router)
 
 export default new Router({
@@ -27,8 +27,38 @@ export default new Router({
       children: [
         {
           path: '/',
-          name: 'eixo',
-          component: Eixo,
+          name: 'home',
+          component: Home,
+        },
+        {
+          path: '/eixos',
+          name: 'eixos',
+          component: () => import('./pages/eixo.vue'),
+        },
+        {
+          name: 'contatos',
+          path: '/contatos',
+          component: () => import('./pages/contatos.vue')
+        },
+        {
+          name: 'editorial',
+          path: '/editorial',
+          component: () => import('./pages/editorial.vue')
+        },
+        {
+          name: 'entidades-participantes',
+          path: '/entidades-participantes',
+          component: () => import('./pages/entidades-participantes.vue')
+        },
+        {
+          name: 'modelo-de-governanca',
+          path: '/modelo-de-governanca',
+          component: () => import('./pages/modelo-de-governanca.vue')
+        },
+        {
+          name: 'visao-de-futuro',
+          path: '/visao-de-futuro',
+          component: () => import('./pages/visao-de-futuro.vue')
         },
         {
           path: '/programa',
@@ -36,9 +66,9 @@ export default new Router({
           component: () => import('./pages/programa.vue'),
         },
         {
-          path: '/contato',
-          name: 'contato',
-          component: () => import('./pages/contato.vue'),
+          path: '/fale-conosco',
+          name: 'fale-conosco',
+          component: () => import('./pages/fale-conosco.vue'),
         },
       ]
     },
