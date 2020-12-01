@@ -67,7 +67,7 @@ export default {
             return false;
           }
           this.isSending = true
-          FuncionarioService.save(this.eixo).then(() => {
+          FuncionarioService.save(this.funcionario).then(() => {
             this.$toaster.success('Funcionário cadastrado com sucesso!');
             this.isSending = false;
             this.$router.push('/funcionarios');
