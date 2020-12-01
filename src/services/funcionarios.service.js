@@ -2,23 +2,23 @@ import axios from './axios.service'
 export default {
 
     getAll() {
-        return axios.get('')
+        return axios.get('funcionarios')
     },
 
     getOne(id) {
-        return axios.get('' + id)
+        return axios.get('funcionarios/' + id)
     },
 
     save(funcionario) {
-        return axios.post('', { funcionario })
+        return axios.post('funcionarios', { funcionario })
     },
 
     edit(id, funcionario) {
-        return axios.put('' + id, { funcionario })
+        return axios.put('funcionarios/' + id, { funcionario })
     },
 
     remove(id) {
-        return axios.delete('' + id)
+        return axios.delete('funcionarios/' + id)
     },
 
 }

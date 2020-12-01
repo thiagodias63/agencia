@@ -84,9 +84,9 @@ export default {
     carregarFuncionario() {
       this.funcionario.id = this.$route.params.id
       this.isLoading = true
-      FuncionarioService.getOne(this.funcionario.id).then((data) => {
+      FuncionarioService.getOne(this.funcionario.id).then((response) => {
         this.isLoading = false;
-        this.funcionario = data
+        this.funcionario = response.data
       })
     },
       salvar() {

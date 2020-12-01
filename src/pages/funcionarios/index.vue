@@ -98,8 +98,8 @@ export default {
   methods: {
     carregarFuncionarios() {
       this.isLoading = true;
-      FuncionarioService.getAll().then((data) => {
-        this.funcionarios = data.funcionarios || []
+      FuncionarioService.getAll().then((response) => {
+        this.funcionarios = response.data || []
         this.isLoading = false;
       })
     },
