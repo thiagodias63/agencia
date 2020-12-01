@@ -10,6 +10,7 @@
         <sidebar-item :link="{name: 'Eixos', icon: '', path: '/eixos'}"/>
         <sidebar-item :link="{name: 'Funcionários', icon: '', path: '/funcionarios'}"/>
         <sidebar-item :link="{name: 'Projetos', icon: '', path: '/projetos'}"/>
+        <sidebar-item :link="{name: 'Sair', icon: '', path: '/logout'}"/>
     </template>
     </side-bar>
     <div class="main-content" :data="sidebarBackground">
@@ -23,27 +24,36 @@
   </div>
 </template>
 <script>
-//   import ContentFooter from './ContentFooter.vue';
-  import { FadeTransition } from 'vue2-transitions';
-
-  export default {
-    components: {
-    //   ContentFooter,
-      FadeTransition
-    },
-    data() {
-      return {
-        sidebarBackground: 'blue' //vue|blue|orange|green|red|primary
-      };
-    },
-    methods: {
-      toggleSidebar() {
-        if (this.$sidebar.showSidebar) {
-          this.$sidebar.displaySidebar(false);
-        }
+import { FadeTransition } from 'vue2-transitions';
+import { mapGetters } from 'vuex';
+export default {
+  computed: {
+    ...mapGetters(['getUsuarioLogado'])
+  },
+  components: {
+  //   ContentFooter,
+    FadeTransition
+  },
+  data() {
+    return {
+      sidebarBackground: 'blue' //vue|blue|orange|green|red|primary
+    };
+  },
+  methods: {
+    toggleSidebar() {
+      if (this.$sidebar.showSidebar) {
+        this.$sidebar.displaySidebar(false);
       }
     }
-  };
+  },
+  created() {
+      // if (this.getUsuarioLogado.find == 'cookie') {
+      //     this.registrarLogin({ ...this.getUsuarioLogado.user })
+      // } else if (!this.getUsuarioLogado.find) {
+      //     this.$router.push({name: 'Logout'});
+      // }
+  }
+};
 </script>
 <style lang="scss">
 .is-invalid {

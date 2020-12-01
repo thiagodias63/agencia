@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import MainLayout from '@/layout/Main'
 import LoginLayout from '@/layout/Login'
+import Logout from '@/pages/logout'
 Vue.use(Router)
 
 export default new Router({
@@ -11,6 +12,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: LoginLayout,
+    },
+    {
+      path: '/logout',
+      name: 'Logout',
+      component: Logout,
     },
     {
       path: '/',

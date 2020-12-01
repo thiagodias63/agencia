@@ -10,7 +10,7 @@
             
              <div class="card-body px-lg-5 py-lg-5">
                 <div class="text-muted mb-4">
-                    <form role="form" ref="form" @submit.prevent="salvar">
+                    <form role="form" ref="form" @submit.prevent="entrar">
                         <div class="form-group">
                             <label for="nome">Nome:</label>
                             <input
@@ -59,6 +59,7 @@
 <script>
 import { required } from 'vuelidate/lib/validators'
 import LoginService from '@/services/login.service'
+import { mapActions } from 'vuex';
 export default {
   title: 'Login',
   data() {
@@ -73,14 +74,18 @@ export default {
     };
   },
   methods: {
-      salvar() {
+      ...mapActions([
+        'registrarLogin',
+      ]),
+      entrar() {
           this.isSubmited = true
           if (this.$v.$invalid)  {
             return false;
           }
           this.isSending = true;
-          LoginService.signin(this.user).then(() => {
+          LoginService.signin(this.user).then((userData) => {
             this.isSending = false;
+            this.registrarLogin(userData)
             this.$router.push('/users')
           }).catch((e) => {
                 this.isSending = false;
