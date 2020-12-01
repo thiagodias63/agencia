@@ -13,14 +13,14 @@ app.use(engine);
 app.set('/view', `${__dirname}/dist`)
 
 app.get('/', function (req, res) {
-    res.render('/index.html');
+    res.render('index.html');
 })
-app.use((req, res, next) => {
-    if ((req.headers["x-forwarded-proto"] || "").endsWith("http"))
-        res.redirect(`https://${req.hostname}${req.url}`);
-    else
-        next();
-});
+// app.use((req, res, next) => {
+//     if ((req.headers["x-forwarded-proto"] || "").endsWith("http"))
+//         res.redirect(`https://${req.hostname}${req.url}`);
+//     else
+//         next();
+// });
 
 app.listen(port, () => {
     console.log('Heroku listening on port %s', port)
