@@ -4,7 +4,7 @@ import AdminLayout from '@/layout/Admin'
 import LoginLayout from '@/layout/Login'
 import HomeLayout from '@/layout/Home'
 import Logout from '@/pages/logout'
-import Home from '@/pages/home'
+import Eixo from '@/pages/eixo'
 Vue.use(Router)
 
 export default new Router({
@@ -27,8 +27,8 @@ export default new Router({
       children: [
         {
           path: '/',
-          name: 'home',
-          component: Home,
+          name: 'eixo',
+          component: Eixo,
         },
         {
           path: '/programa',
