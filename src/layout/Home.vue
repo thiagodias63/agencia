@@ -7,8 +7,8 @@
         >
         <template slot="links">
             <sidebar-item :link="{name: 'Home', icon: 'fa fa-home', path: '/'}"/>
-            <sidebar-item :link="{name: 'O Programa', icon: 'fa fa-archive', path: '/'}"/>
-            <sidebar-item :link="{name: 'Fale Conosco', icon: 'fa fa-paper-plane', path: '/'}"/>
+            <sidebar-item :link="{name: 'O Programa', icon: 'fa fa-archive', path: '/programa'}"/>
+            <sidebar-item :link="{name: 'Fale Conosco', icon: 'fa fa-paper-plane', path: '/contato'}"/>
             <sidebar-item :link="{name: 'Admin', icon: 'fa fa-lock', path: '/admin'}"/>
         </template>
         </side-bar>
@@ -45,7 +45,8 @@ export default {
 <style lang="css">
 .home {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     padding: 15vh 15vw;
     background: linear-gradient(87deg, #000046 0, #1CB5E0 100%) !important;
 }

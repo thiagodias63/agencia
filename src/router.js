@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import AdminLayout from '@/layout/Admin'
 import LoginLayout from '@/layout/Login'
+import HomeLayout from '@/layout/Home'
 import Logout from '@/pages/logout'
 import Home from '@/pages/home'
 Vue.use(Router)
@@ -21,8 +22,25 @@ export default new Router({
     },
     {
       path: '/',
-      name: 'home',
-      component: Home,
+      redirect: 'home',
+      component: HomeLayout,
+      children: [
+        {
+          path: '/',
+          name: 'home',
+          component: Home,
+        },
+        {
+          path: '/programa',
+          name: 'programa',
+          component: () => import('./pages/programa.vue'),
+        },
+        {
+          path: '/contato',
+          name: 'contato',
+          component: () => import('./pages/contato.vue'),
+        },
+      ]
     },
     {
       path: '/admin',

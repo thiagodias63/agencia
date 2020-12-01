@@ -6,7 +6,7 @@
     <div class="container-fluid mt--7">
       <div class="row">
         <div class="col">
-          <div class="card shadow" style="width: 50%; margin: 0 auto;">
+          <div class="card shadow" style="">
             
              <div class="card-body px-lg-5 py-lg-5">
                 <div class="text-muted mb-4">
@@ -118,5 +118,10 @@ export default {
         padding: 0.625rem 0.75rem;
         border: 1px solid rgba(50, 50, 93, 0.15);
         
+    }
+    @media (min-width: 769px) {
+      .card{
+        width: 50%; margin: 0 auto;
+      }
     }
 </style>
