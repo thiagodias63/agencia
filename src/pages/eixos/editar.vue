@@ -84,9 +84,9 @@ export default {
     carregarEixo() {
       this.eixo.id = this.$route.params.id
       this.isLoading = true
-      EixoService.getOne(this.eixo.id).then(() => {
+      EixoService.getOne(this.eixo.id).then((response) => {
         this.isLoading = false;
-        this.eixo.nome = 'A'
+        this.eixo = response.data
       },2000)
     },
       salvar() {
@@ -95,7 +95,7 @@ export default {
             return false;
           }
           this.isSending = true;
-          EixoService.edit(this.funcionario.id, this.funcionario).then(() => {
+          EixoService.edit(this.eixo.id, this.eixo).then(() => {
             this.$toaster.success('Eixo editado com sucesso!');
             this.isSending = false
             this.$router.push('/eixos')

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-    baseURL: 'http://localhost:8008'
+    baseURL: 'http://deiferson.com/api/'
 });
 
 export default instance

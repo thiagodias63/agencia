@@ -98,9 +98,9 @@ export default {
   methods: {
     carregarEixos() {
       this.isLoading = true;
-      EixoService.getAll().then((data) => {
+      EixoService.getAll().then((response) => {
         this.isLoading = false;
-        this.eixos = data.eixos || [];
+        this.eixos = response.data || [];
       })
     },
     modalRemover(eixo) {
