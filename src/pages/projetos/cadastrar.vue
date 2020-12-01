@@ -15,7 +15,7 @@
                   </h3>
                 </div>
                 <div class="col text-right">
-                  <router-link class="btn btn-sm btn-primary" to="/projetos">Voltar</router-link>
+                  <router-link class="btn btn-sm btn-primary" to="/admin/projetos">Voltar</router-link>
                 </div>
               </div>
             </div>
@@ -100,7 +100,7 @@ export default {
           ProjetoService.save(this.projeto).then(() => {
             this.$toaster.success('Projeto cadastrado com sucesso!');
             this.isSending = false;
-            this.$router.push('/projetos');
+            this.$router.push('/admin/projetos');
           }).catch((e) => {
             this.isSending = false;
             console.error(e)

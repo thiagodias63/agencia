@@ -15,7 +15,7 @@
                   </h3>
                 </div>
                 <div class="col text-right">
-                  <router-link class="btn btn-sm btn-primary" to="/eixos">Voltar</router-link>
+                  <router-link class="btn btn-sm btn-primary" to="/admin/eixos">Voltar</router-link>
                 </div>
               </div>
             </div>
@@ -98,7 +98,7 @@ export default {
           EixoService.edit(this.eixo.id, this.eixo).then(() => {
             this.$toaster.success('Eixo editado com sucesso!');
             this.isSending = false
-            this.$router.push('/eixos')
+            this.$router.push('/admin/eixos')
           }).catch((e) => {
             this.isSending = false;
             console.error(e)

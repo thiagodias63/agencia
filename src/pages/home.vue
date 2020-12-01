@@ -6,7 +6,8 @@
         title="Agenda de Covergencia"
         >
         <template slot="links">
-            <sidebar-item :link="{name: 'Home', icon: 'fa fa-home', path: '/home'}"/>
+            <sidebar-item :link="{name: 'Home', icon: 'fa fa-home', path: '/'}"/>
+            <sidebar-item :link="{name: 'Admin', icon: 'fa fa-lock', path: '/admin'}"/>
         </template>
         </side-bar>
         <div class="main-content" :data="sidebarBackground">

@@ -15,7 +15,7 @@
                   </h3>
                 </div>
                 <div class="col text-right">
-                  <router-link class="btn btn-sm btn-primary" to="/eixos/cadastrar">Cadastrar</router-link>
+                  <router-link class="btn btn-sm btn-primary" to="/admin/eixos/cadastrar">Cadastrar</router-link>
                 </div>
               </div>
             </div>

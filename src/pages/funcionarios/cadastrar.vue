@@ -15,7 +15,7 @@
                   </h3>
                 </div>
                 <div class="col text-right">
-                  <router-link class="btn btn-sm btn-primary" to="/funcionarios">Voltar</router-link>
+                  <router-link class="btn btn-sm btn-primary" to="/admin/funcionarios">Voltar</router-link>
                 </div>
               </div>
             </div>
@@ -70,7 +70,7 @@ export default {
           FuncionarioService.save(this.funcionario).then(() => {
             this.$toaster.success('Funcionário cadastrado com sucesso!');
             this.isSending = false;
-            this.$router.push('/funcionarios');
+            this.$router.push('/admin/funcionarios');
           }).catch((e) => {
             this.isSending = false;
             console.error(e)

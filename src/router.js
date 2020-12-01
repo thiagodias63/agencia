@@ -20,12 +20,12 @@ export default new Router({
       component: Logout,
     },
     {
-      path: '/home',
+      path: '/',
       name: 'home',
       component: Home,
     },
     {
-      path: '/',
+      path: '/admin',
       redirect: 'index',
       component: MainLayout,
       children: [
@@ -35,47 +35,47 @@ export default new Router({
           component: () => import('./pages/index.vue')
         },
         {
-          path: '/projetos',
+          path: '/admin/projetos',
           name: 'projetos',
           component: () => import('./pages/projetos')
         }, 
         {
-          path: '/projetos/cadastrar',
+          path: '/admin/projetos/cadastrar',
           name: 'projetos-cadastrar',
           component: () => import('./pages/projetos/cadastrar')
         },
         {
-          path: '/projetos/:id',
+          path: '/admin/projetos/:id',
           name: 'projetos-editar',
           component: () => import('./pages/projetos/editar')
         },
         {
-          path: '/funcionarios',
+          path: '/admin/funcionarios',
           name: 'funcionarios',
           component: () => import('./pages/funcionarios')
         },        
         {
-          path: '/funcionarios/cadastrar',
+          path: '/admin/funcionarios/cadastrar',
           name: 'funcionarios-cadastrar',
           component: () => import('./pages/funcionarios/cadastrar')
         },
         {
-          path: '/funcionarios/:id',
+          path: '/admin/funcionarios/:id',
           name: 'funcionarios-editar',
           component: () => import('./pages/funcionarios/editar')
         },
         {
-          path: '/eixos',
+          path: '/admin/eixos',
           name: 'eixos',
           component: () => import('./pages/eixos')
         },
         {
-          path: '/eixos/cadastrar',
+          path: '/admin/eixos/cadastrar',
           name: 'eixos-cadastrar',
           component: () => import('./pages/eixos/cadastrar')
         },
         {
-          path: '/eixos/:id',
+          path: '/admin/eixos/:id',
           name: 'eixos-editar',
           component: () => import('./pages/eixos/editar')
         },

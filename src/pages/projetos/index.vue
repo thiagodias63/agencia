@@ -15,7 +15,7 @@
                   </h3>
                 </div>
                 <div class="col text-right">
-                  <router-link class="btn btn-sm btn-primary" to="/projetos/cadastrar">Cadastrar</router-link>
+                  <router-link class="btn btn-sm btn-primary" to="/admin/projetos/cadastrar">Cadastrar</router-link>
                 </div>
               </div>
             </div>
