@@ -10,11 +10,11 @@ export default {
     },
 
     save(eixo) {
-        return axios.post('eixos', { eixo })
+        return axios.post('eixos', eixo)
     },
 
     edit(id, eixo) {
-        return axios.patch('eixos/' + id, { eixo })
+        return axios.patch('eixos/' + id, eixo)
     },
 
     remove(id) {

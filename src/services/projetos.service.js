@@ -10,11 +10,11 @@ export default {
     },
 
     save(projeto) {
-        return axios.post('projetos', { projeto })
+        return axios.post('projetos', projeto)
     },
 
     edit(id, projeto) {
-        return axios.put('projetos/' + id, { projeto })
+        return axios.put('projetos/' + id, projeto)
     },
 
     remove(id) {

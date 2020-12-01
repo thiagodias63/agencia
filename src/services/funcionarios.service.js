@@ -10,11 +10,11 @@ export default {
     },
 
     save(funcionario) {
-        return axios.post('funcionarios', { funcionario })
+        return axios.post('funcionarios', funcionario)
     },
 
     edit(id, funcionario) {
-        return axios.put('funcionarios/' + id, { funcionario })
+        return axios.put('funcionarios/' + id, funcionario)
     },
 
     remove(id) {
