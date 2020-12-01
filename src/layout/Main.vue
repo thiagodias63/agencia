@@ -6,11 +6,11 @@
       title="Agenda de Covergencia"
     >
     <template slot="links">
-        <sidebar-item :link="{name: 'Home', icon: '', path: '/'}"/>
-        <sidebar-item :link="{name: 'Eixos', icon: '', path: '/eixos'}"/>
-        <sidebar-item :link="{name: 'Funcionários', icon: '', path: '/funcionarios'}"/>
-        <sidebar-item :link="{name: 'Projetos', icon: '', path: '/projetos'}"/>
-        <sidebar-item :link="{name: 'Sair', icon: '', path: '/logout'}"/>
+        <sidebar-item :link="{name: 'Home', icon: 'fa fa-home', path: '/'}"/>
+        <sidebar-item :link="{name: 'Eixos', icon: 'fa fa-certificate', path: '/eixos'}"/>
+        <sidebar-item :link="{name: 'Funcionários', icon: 'fa fa-user-friends', path: '/funcionarios'}"/>
+        <sidebar-item :link="{name: 'Projetos', icon: 'fab fa-buromobelexperte', path: '/projetos'}"/>
+        <sidebar-item :link="{name: 'Sair', icon: 'fa fa-door-open', path: '/logout'}"/>
     </template>
     </side-bar>
     <div class="main-content" :data="sidebarBackground">

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import MainLayout from '@/layout/Main'
 import LoginLayout from '@/layout/Login'
 import Logout from '@/pages/logout'
+import Home from '@/pages/home'
 Vue.use(Router)
 
 export default new Router({
@@ -17,6 +18,11 @@ export default new Router({
       path: '/logout',
       name: 'Logout',
       component: Logout,
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: Home,
     },
     {
       path: '/',
