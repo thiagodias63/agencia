@@ -114,23 +114,23 @@ export default {
     carregarProjeto() {
       this.projeto.id = this.$route.params.id
       this.isLoading = true
-      ProjetoService.getOne(this.funcionario.id).then((data) => {
+      ProjetoService.getOne(this.funcionario.id).then((response) => {
         this.isLoading = false;
-        this.projeto = data
+        this.projeto = response.data
       })
     },
-      salvar() {
-          this.isSubmited = true
-          if (this.$v.$invalid)  {
-            return false;
-          }
-          this.isSending = true
-          ProjetoService.edit(this.eixo.id, this.eixo).then(() => {
-            this.$toaster.success('Projeto editado com sucesso!');
-            this.isSending = false;
-            this.$router.push('/projetos');
-          })
+    salvar() {
+      this.isSubmited = true
+      if (this.$v.$invalid)  {
+        return false;
       }
+      this.isSending = true
+      ProjetoService.edit(this.eixo.id, this.eixo).then(() => {
+        this.$toaster.success('Projeto editado com sucesso!');
+        this.isSending = false;
+        this.$router.push('/projetos');
+      })
+    }
   },
   validations: {
     projeto: {

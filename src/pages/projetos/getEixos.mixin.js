@@ -12,10 +12,9 @@ export default {
     methods: {
         carregarEixos() {
             this.carregandoEixos = true;
-            EixoService.getAll().then((data) => {
+            EixoService.getAll().then((response) => {
                 this.carregandoEixos = false;
-                this.eixos = data.eixos || []
-                // this.eixos = [{ id: 1, nome: 'A'}]
+                this.eixos = response.data || []
             })
         }
     }

@@ -40,7 +40,7 @@
                     {{ row.meta }}
                   </td>
                   <td>
-                    {{ row.eixo.nome }}
+                    <!-- {{ row.eixo.nome }} -->
                   </td>
 
                   <td class="text-right">
@@ -106,9 +106,9 @@ export default {
   methods: {
     carregarProjetos() {
       this.isLoading = true;
-      ProjetoService.getAll().then((data) => {
-        this.projetos = data.projetos || [];
-        // this.projetos = [{ id: 1, nome: 'a', meta: 'b', eixo: { nome: 'eixoA' } }]
+      ProjetoService.getAll().then((response) => {
+        console.log({response})
+        this.projetos = response.data || [];
         this.isLoading = false;
       })
     },
