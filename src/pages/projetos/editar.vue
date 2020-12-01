@@ -48,12 +48,12 @@
                                 id="eixo"
                                 class="input-group-alternative mb-3 input-sm form-control"
                                 v-model="projeto.eixo"
-                                :disabled="isSending || carregandoEixos"
+                                :disabled="isSending"
                                 :class="{ 'is-invalid': isSubmited && $v.projeto.eixo.$invalid}">
                                 <option
                                   v-for="(eixo, index) in eixos"
                                   :key="index"
-                                  :value="eixo.id">
+                                  :value="eixo">
                                   {{ eixo.nome }}
                                 </option>
                             </select>
@@ -85,12 +85,11 @@
 
 <script>
 import { required } from 'vuelidate/lib/validators'
-import Loader from '../../components/loader'
-import getEixosMixin from './getEixos.mixin'
+import Loader from '@/components/loader'
 import ProjetoService from '@/services/projetos.service'
+import EixoService from '@/services/eixos.service'
 export default {
   title: 'Projetos - Edição',
-  mixins: [getEixosMixin],
   created() {
     this.carregarProjeto()
   },
@@ -100,11 +99,12 @@ export default {
         isSubmited: false,
         isSending: false,
         projeto: {
-            id: 0,
-            nome: '',
-            meta: '',
-            eixo: '',
-        }
+          id: 0,
+          nome: '',
+          meta: '',
+          eixo: '',
+        },
+        eixos: [],
     };
   },
   components: {
@@ -114,9 +114,16 @@ export default {
     carregarProjeto() {
       this.projeto.id = this.$route.params.id
       this.isLoading = true
-      ProjetoService.getOne(this.funcionario.id).then((response) => {
-        this.isLoading = false;
-        this.projeto = response.data
+      EixoService.getAll().then((eixos) => {
+        this.eixos = eixos.data
+        ProjetoService.getOne(this.projeto.id).then((response) => {
+          this.isLoading = false;
+          this.projeto = response.data;
+          console.log(this.projeto)
+          this.projeto.eixo = this.eixos.find((eixo)=> {
+            return eixo.id === this.projeto.eixo_id;
+          })
+        })
       })
     },
     salvar() {
@@ -125,7 +132,12 @@ export default {
         return false;
       }
       this.isSending = true
-      ProjetoService.edit(this.eixo.id, this.eixo).then(() => {
+      ProjetoService.edit(this.projeto.id, {
+          ...this.projeto,
+          eixo: this.projeto.eixo.id,
+          estado: this.projeto.estado_id,
+          funcionarios: this.projeto.funcionarios.map((funcionario) => funcionario.id)
+        }).then(() => {
         this.$toaster.success('Projeto editado com sucesso!');
         this.isSending = false;
         this.$router.push('/projetos');

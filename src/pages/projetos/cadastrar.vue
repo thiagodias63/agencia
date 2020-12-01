@@ -97,7 +97,7 @@ export default {
             return false;
           }
           this.isSending = true
-          ProjetoService.save(this.eixo).then(() => {
+          ProjetoService.save(this.projeto).then(() => {
             this.$toaster.success('Projeto cadastrado com sucesso!');
             this.isSending = false;
             this.$router.push('/projetos');

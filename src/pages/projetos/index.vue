@@ -111,7 +111,6 @@ export default {
       EixoService.getAll().then((eixos) => {
         this.eixos = eixos.data
         ProjetoService.getAll().then((response) => {
-          console.log({response})
           this.projetos = response.data.map((projeto) => {
             projeto.eixo = this.eixos.find((eixo)=> {
               return eixo.id === projeto.eixo_id;
