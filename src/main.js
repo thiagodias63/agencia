@@ -11,7 +11,7 @@ import { store } from './store'
 
 Vue.use(Vuelidate)
 Vue.mixin(titleMixin)
-Vue.use(Toaster, {timeout: 60000})
+Vue.use(Toaster, {timeout: 3000})
 Vue.use(Vuex);
 
 Vue.config.productionTip = false
