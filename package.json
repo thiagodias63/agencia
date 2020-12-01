@@ -28,12 +28,7 @@
     "vue-router": "3.3.4",
     "vue2-transitions": "0.3.0",
     "vuelidate": "^0.7.6",
-    "vuex": "^3.6.0",
-    "compression": "^1.7.4",
-    "express": "^4.17.1",
-    "express-edge": "^2.0.2",
-    "@vue/cli-service": "^4.4.6",
-    "vue-template-compiler": "2.6.11"
+    "vuex": "^3.6.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.4.6",
@@ -43,7 +38,9 @@
     "eslint": "^7.3.1",
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^4.14.1",
-    "sass-loader": "^8.0.2"
+    "sass-loader": "^8.0.2",
+    "@vue/cli-service": "^4.4.6",
+    "vue-template-compiler": "2.6.11"
   },
   "eslintConfig": {
     "root": true,
