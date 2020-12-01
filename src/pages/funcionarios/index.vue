@@ -115,6 +115,10 @@ export default {
         this.carregarFuncionarios();
         this.$toaster.error('Funcionário deletado com sucesso!');
         this.isSending = false;
+      }).catch((e) => {
+        this.isSending = false;
+        console.error(e)
+        this.$toaster.error('Erro ao remover funcionário!');
       })
     },
     fecharModal() {

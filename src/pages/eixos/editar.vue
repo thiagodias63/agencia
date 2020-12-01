@@ -99,6 +99,10 @@ export default {
             this.$toaster.success('Eixo editado com sucesso!');
             this.isSending = false
             this.$router.push('/eixos')
+          }).catch((e) => {
+            this.isSending = false;
+            console.error(e)
+            this.$toaster.error('Erro ao salvar eixo!');
           })
       }
   },

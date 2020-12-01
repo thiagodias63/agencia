@@ -134,6 +134,10 @@ export default {
         this.carregarProjetos();
         this.$toaster.error('Projeto deletado com sucesso!');
         this.isSending = false;
+      }).catch((e) => {
+        this.isSending = false;
+        console.error(e)
+        this.$toaster.error('Erro ao remover projeto!');
       })
     },
     fecharModal() {

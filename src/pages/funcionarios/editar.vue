@@ -99,6 +99,10 @@ export default {
             this.$toaster.success('Funcionário editado com sucesso!');
             this.isSending = false;
             this.$router.push('/funcionarios');
+          }).catch((e) => {
+            this.isSending = false;
+            console.error(e)
+            this.$toaster.error('Erro ao salvar funcionário!');
           })
       }
   },

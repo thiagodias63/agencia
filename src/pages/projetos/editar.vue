@@ -129,6 +129,10 @@ export default {
         this.$toaster.success('Projeto editado com sucesso!');
         this.isSending = false;
         this.$router.push('/projetos');
+      }).catch((e) => {
+        this.isSending = false;
+        console.error(e)
+        this.$toaster.error('Erro ao salvar projeto!');
       })
     }
   },
