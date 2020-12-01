@@ -29,6 +29,7 @@
                   <th>Nome</th>
                   <th>Meta</th>
                   <th>Eixo</th>
+                  <th>Gestores</th>
                   <th></th>
                 </template>
 

@@ -58,6 +58,20 @@
                                 </option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="eixo">Funcionarios:</label>
+                            <div class="form-check" v-for="(funcionario, index) in funcionarios" :key="index">
+                              <input
+                                  :id="index"
+                                  class="form-check-input"
+                                  type="checkbox"
+                                  :value="funcionario.id"
+                                  v-model="projeto.funcionarios"
+                                  :disabled="isSending || carregandoFuncionarios"
+                                >
+                                <label class="form-check-label" :for="index"> {{ funcionario.nome }} </label>
+                            </div>
+                        </div>
                         <button
                             :disabled="isSending"
                             class="btn btn-success"
@@ -88,8 +102,10 @@ import { required } from 'vuelidate/lib/validators'
 import Loader from '@/components/loader'
 import ProjetoService from '@/services/projetos.service'
 import EixoService from '@/services/eixos.service'
+import getFuncionarios from './getFuncionarios.mixin'
 export default {
   title: 'Projetos - Edição',
+  mixins: [getFuncionarios],
   created() {
     this.carregarProjeto()
   },
@@ -103,6 +119,7 @@ export default {
           nome: '',
           meta: '',
           eixo: '',
+          funcionarios: [],
         },
         eixos: [],
     };
@@ -119,10 +136,10 @@ export default {
         ProjetoService.getOne(this.projeto.id).then((response) => {
           this.isLoading = false;
           this.projeto = response.data;
-          console.log(this.projeto)
           this.projeto.eixo = this.eixos.find((eixo)=> {
             return eixo.id === this.projeto.eixo_id;
           })
+          this.projeto.funcionarios = response.data.funcionarios.map((funcionario) => funcionario.id)
         })
       })
     },
@@ -136,7 +153,7 @@ export default {
           ...this.projeto,
           eixo: this.projeto.eixo.id,
           estado: this.projeto.estado_id,
-          funcionarios: this.projeto.funcionarios.map((funcionario) => funcionario.id)
+          // funcionarios: this.projeto.funcionarios.map((funcionario) => funcionario.id)
         }).then(() => {
         this.$toaster.success('Projeto editado com sucesso!');
         this.isSending = false;

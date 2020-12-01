@@ -58,6 +58,20 @@
                                 </option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="eixo">Funcionarios:</label>
+                            <div class="form-check" v-for="(funcionario, index) in funcionarios" :key="index">
+                              <input
+                                  :id="index"
+                                  class="form-check-input"
+                                  type="checkbox"
+                                  :value="funcionario.id"
+                                  v-model="projeto.funcionarios"
+                                  :disabled="isSending || carregandoFuncionarios"
+                                >
+                                <label class="form-check-label" :for="index"> {{ funcionario.nome }} </label>
+                            </div>
+                        </div>
                         <button
                             :disabled="isSending"
                             class="btn btn-success"
@@ -75,10 +89,11 @@
 <script>
 import { required } from 'vuelidate/lib/validators'
 import getEixosMixin from './getEixos.mixin'
+import getFuncionarios from './getFuncionarios.mixin'
 import ProjetoService from '@/services/projetos.service'
 export default {
   title: 'Projetos - Cadastro',
-  mixins: [getEixosMixin],
+  mixins: [getEixosMixin, getFuncionarios],
   data() {
     return {
         isSubmited: false,
@@ -87,6 +102,8 @@ export default {
             nome: '',
             meta: '',
             eixo: {},
+            funcionarios: [],
+            estado: 1
         }
     };
   },
