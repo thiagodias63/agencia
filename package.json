@@ -8,7 +8,7 @@
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "npm run build && node app",
+    "start": "vue-cli-service build && node app",
     "app": "node app"
   },
   "dependencies": {
