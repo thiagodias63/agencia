@@ -14,7 +14,7 @@ export default {
             this.carregandoEixos = true;
             EixoService.getAll().then((response) => {
                 this.carregandoEixos = false;
-                this.eixos = response.data || []
+                this.eixos = response.eixos || []
             })
         }
     }

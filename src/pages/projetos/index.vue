@@ -40,7 +40,7 @@
                     {{ row.meta }}
                   </td>
                   <td>
-                    <!-- {{ row.eixo.nome }} -->
+                    {{ row.eixo.nome }}
                   </td>
 
                   <td class="text-right">
@@ -87,8 +87,9 @@
 </template>
 
 <script>
-import Loader from '../../components/loader'
+import Loader from '@/components/loader'
 import ProjetoService from '@/services/projetos.service'
+import EixoService from '@/services/eixos.service'
 export default {
   title: 'Projetos - Lista',
   data() {
@@ -98,6 +99,7 @@ export default {
       isRemoving: false,
       isSending: false,
       projetoSelecionado: {},
+      eixos: [],
     };
   },
   components: {
@@ -106,10 +108,18 @@ export default {
   methods: {
     carregarProjetos() {
       this.isLoading = true;
-      ProjetoService.getAll().then((response) => {
-        console.log({response})
-        this.projetos = response.data || [];
-        this.isLoading = false;
+      EixoService.getAll().then((eixos) => {
+        this.eixos = eixos.data
+        ProjetoService.getAll().then((response) => {
+          console.log({response})
+          this.projetos = response.data.map((projeto) => {
+            projeto.eixo = this.eixos.find((eixo)=> {
+              return eixo.id === projeto.eixo_id;
+            })
+            return projeto;
+          }) || [];
+          this.isLoading = false;
+        })
       })
     },
     modalRemover(projeto) {
