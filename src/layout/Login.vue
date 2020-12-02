@@ -12,20 +12,20 @@
                 <div class="text-muted mb-4">
                     <form role="form" ref="form" @submit.prevent="entrar">
                         <div class="form-group">
-                            <label for="nome">Nome:</label>
+                            <label for="email">Email:</label>
                             <input
-                                id="nome"
+                                id="email"
                                 type="text"
                                 class="input-group-alternative mb-3 input-sm form-control"
-                                v-model="user.username"
+                                v-model="user.email"
                                 :disabled="isSending"
-                                :class="{ 'is-invalid': isSubmited && $v.user.username.$invalid}">
+                                :class="{ 'is-invalid': isSubmited && $v.user.email.$invalid}">
                         </div>
                         <div class="form-group">
-                            <label for="nome">Senha:</label>
+                            <label for="password">Senha:</label>
                             <div class="inline-form-group">
                                 <input
-                                    id="nome"
+                                    id="password"
                                     :type="isPasswordVisible ? 'text' : 'password'"
                                     class="input-group-alternative mb-3 input-sm form-control"
                                     v-model="user.password"
@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { required } from 'vuelidate/lib/validators'
+import { required, email } from 'vuelidate/lib/validators'
 import LoginService from '@/services/login.service'
 import { mapActions } from 'vuex';
 export default {
@@ -68,7 +68,7 @@ export default {
         isSending: false,
         isPasswordVisible: false,
         user: {
-            username: '',
+            email: '',
             password: '',
         }
     };
@@ -85,10 +85,15 @@ export default {
           this.isSending = true;
           LoginService.signin(this.user).then((userData) => {
             this.isSending = false;
-            this.registrarLogin(userData)
-            this.$router.push('/users')
+            this.registrarLogin({
+              id: userData.data.user.id,
+              email: userData.data.user.email,
+              nome: userData.data.user.nome,
+              token: userData.data.token
+            });
+            this.$router.push('/admin');
           }).catch((e) => {
-                this.isSending = false;
+              this.isSending = false;
               console.error(e)
               this.$toaster.warning('Não foi possível fazer login! Tente novamente.');
           })
@@ -96,8 +101,9 @@ export default {
   },
   validations: {
     user: {
-        username: {
-            required
+        email: {
+            required,
+            email,
         },
         password: {
             required

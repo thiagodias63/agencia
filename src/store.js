@@ -1,3 +1,5 @@
+import CookieService from './services/cookie.service'
+import AxiosService from './services/axios.service'
 export const store = {
     state: {
         usuario: {
@@ -23,7 +25,7 @@ export const store = {
             nome: '',
             token: ''
         }
-
+        AxiosService.defaults.headers.common['Authorization'] = ''
         let keyValue = 'usuario='
         let now = new Date();
         now.setTime(now.getTime() - 24 * 60 * 60 * 1000);
@@ -42,7 +44,19 @@ export const store = {
     },
     getters: {
       getUsuarioLogado: state => {
-        return state.usuario.email !== '' ? true : false
+        if (state.usuario.email) {
+          AxiosService.defaults.headers.common['Authorization'] = state.usuario.token
+          return { find: 'state' }
+        } else {
+          if (CookieService.getCookieValue('usuario')) {
+            const usuario = JSON.parse(CookieService.getCookieValue('usuario'))
+            if (CookieService.getCookieValue('usuario') != '{}' && usuario?.email) {
+              AxiosService.defaults.headers.common['Authorization'] = usuario.token
+              return { find: 'cookie', user: usuario }
+            }
+          }
+        }
+        return { find: false }
       },
       getUsuario: state => {
         return state.usuario

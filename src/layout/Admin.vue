@@ -25,7 +25,7 @@
 </template>
 <script>
 import { FadeTransition } from 'vue2-transitions';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 export default {
   computed: {
     ...mapGetters(['getUsuarioLogado'])
@@ -40,6 +40,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(['registrarLogin']),
     toggleSidebar() {
       if (this.$sidebar.showSidebar) {
         this.$sidebar.displaySidebar(false);
@@ -47,11 +48,11 @@ export default {
     }
   },
   created() {
-      // if (this.getUsuarioLogado.find == 'cookie') {
-      //     this.registrarLogin({ ...this.getUsuarioLogado.user })
-      // } else if (!this.getUsuarioLogado.find) {
-      //     this.$router.push({name: 'Logout'});
-      // }
+      if (this.getUsuarioLogado.find == 'cookie') {
+        this.registrarLogin({ ...this.getUsuario })
+      } else if (!this.getUsuarioLogado.find) {
+        this.$router.push({name: 'Logout'});
+      }
   }
 };
 </script>

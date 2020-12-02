@@ -1,7 +1,7 @@
 import axios from './axios.service'
 export default {
     signin(user) {
-        return axios.post('', user)
+        return axios.post('/auth/login', user)
     },
 
 }
