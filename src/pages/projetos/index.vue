@@ -30,6 +30,7 @@
                   <th>Meta</th>
                   <th>Eixo</th>
                   <th>Gestores</th>
+                  <th>Status</th>
                   <th></th>
                 </template>
 
@@ -42,6 +43,22 @@
                   </td>
                   <td>
                     {{ row.eixo.nome }}
+                  </td>
+                  <td>
+                    <span
+                      class="badge badge-default"
+                      style="margin-right: 3px;"
+                      v-for="(funcionario, index) in row.funcionarios"
+                      :key="index">
+                      {{ funcionario.nome }}
+                    </span>
+                  </td>
+                  <td>
+                    <span
+                      style="padding: .4rem .8rem !important; border-radius: 4px;"
+                      :style="{'background-color': row.estado.cor, 'border-color': row.estado.cor}">
+                      {{ row.estado.nome }}
+                    </span>
                   </td>
 
                   <td class="text-right">
@@ -90,7 +107,6 @@
 <script>
 import Loader from '@/components/loader'
 import ProjetoService from '@/services/projetos.service'
-import EixoService from '@/services/eixos.service'
 export default {
   title: 'Projetos - Lista',
   data() {
@@ -100,7 +116,6 @@ export default {
       isRemoving: false,
       isSending: false,
       projetoSelecionado: {},
-      eixos: [],
     };
   },
   components: {
@@ -109,17 +124,9 @@ export default {
   methods: {
     carregarProjetos() {
       this.isLoading = true;
-      EixoService.getAll().then((eixos) => {
-        this.eixos = eixos.data
-        ProjetoService.getAll().then((response) => {
-          this.projetos = response.data.map((projeto) => {
-            projeto.eixo = this.eixos.find((eixo)=> {
-              return eixo.id === projeto.eixo_id;
-            })
-            return projeto;
-          }) || [];
-          this.isLoading = false;
-        })
+      ProjetoService.getAll().then((response) => {
+        this.projetos = response.data || [];
+        this.isLoading = false;
       })
     },
     modalRemover(projeto) {

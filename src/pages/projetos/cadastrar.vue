@@ -58,6 +58,22 @@
                                 </option>
                             </select>
                         </div>
+                         <div class="form-group">
+                            <label for="eixo">Estado:</label>
+                            <select
+                                id="estado"
+                                class="input-group-alternative mb-3 input-sm form-control"
+                                v-model="projeto.estado"
+                                :disabled="isSending"
+                                :class="{ 'is-invalid': isSubmited && $v.projeto.estado.$invalid}">
+                                <option
+                                  v-for="(estado, index) in estados"
+                                  :key="index"
+                                  :value="estado">
+                                  {{ estado.nome }}
+                                </option>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label for="eixo">Funcionarios:</label>
                             <div class="form-check" v-for="(funcionario, index) in funcionarios" :key="index">
@@ -90,10 +106,11 @@
 import { required } from 'vuelidate/lib/validators'
 import getEixosMixin from './getEixos.mixin'
 import getFuncionarios from './getFuncionarios.mixin'
+import getEstados from './getEstados.mixin'
 import ProjetoService from '@/services/projetos.service'
 export default {
   title: 'Projetos - Cadastro',
-  mixins: [getEixosMixin, getFuncionarios],
+  mixins: [getEixosMixin, getFuncionarios, getEstados],
   data() {
     return {
         isSubmited: false,
@@ -134,6 +151,9 @@ export default {
             required
         },
         eixo: {
+            required
+        },
+        estado: {
             required
         },
     }

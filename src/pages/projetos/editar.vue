@@ -59,6 +59,22 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="eixo">Estado:</label>
+                            <select
+                                id="estado"
+                                class="input-group-alternative mb-3 input-sm form-control"
+                                v-model="projeto.estado"
+                                :disabled="isSending"
+                                :class="{ 'is-invalid': isSubmited && $v.projeto.estado.$invalid}">
+                                <option
+                                  v-for="(estado, index) in estados"
+                                  :key="index"
+                                  :value="estado">
+                                  {{ estado.nome }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="eixo">Funcionarios:</label>
                             <div class="form-check" v-for="(funcionario, index) in funcionarios" :key="index">
                               <input
@@ -103,9 +119,10 @@ import Loader from '@/components/loader'
 import ProjetoService from '@/services/projetos.service'
 import EixoService from '@/services/eixos.service'
 import getFuncionarios from './getFuncionarios.mixin'
+import getEstados from './getEstados.mixin'
 export default {
   title: 'Projetos - Edição',
-  mixins: [getFuncionarios],
+  mixins: [getFuncionarios, getEstados],
   created() {
     this.carregarProjeto()
   },
@@ -139,6 +156,9 @@ export default {
           this.projeto.eixo = this.eixos.find((eixo)=> {
             return eixo.id === this.projeto.eixo_id;
           })
+          this.projeto.estado = this.estados.find((estado)=> {
+            return estado.id === this.projeto.estado_id;
+          })
           this.projeto.funcionarios = response.data.funcionarios.map((funcionario) => funcionario.id)
         })
       })
@@ -152,7 +172,7 @@ export default {
       ProjetoService.edit(this.projeto.id, {
           ...this.projeto,
           eixo: this.projeto.eixo.id,
-          estado: this.projeto.estado_id,
+          estado: this.projeto.estado.id,
           // funcionarios: this.projeto.funcionarios.map((funcionario) => funcionario.id)
         }).then(() => {
         this.$toaster.success('Projeto editado com sucesso!');
@@ -174,6 +194,9 @@ export default {
             required
         },
         eixo: {
+            required
+        },
+        estado: {
             required
         },
     }

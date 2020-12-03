@@ -10,14 +10,17 @@ export const store = {
         },
     },
     mutations: {
-      setUsuario (state, user) {
-        state.usuario = user
-        let keyValue = 'usuario='+JSON.stringify(user);
-        let now = new Date();
-        now.setTime(now.getTime() + 7 * 24 * 60 * 60 * 1000);
-        let expires = 'expires=' + now.toUTCString();
-        let cookieStr = keyValue + ';' + expires;
-        document.cookie = cookieStr;
+      setUsuario (state, usuario) {
+        if (usuario && usuario.email) {
+          state.usuario = usuario
+          // let keyValue = 'usuario='+JSON.stringify(usuario);
+          // let now = new Date();
+          // now.setTime(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+          // let expires = 'expires=' + now.toUTCString();
+          // let cookieStr = keyValue + ';' + expires;
+          // document.cookie = cookieStr;
+          localStorage.setItem('usuario', JSON.stringify(usuario))
+        }
       },
       logoutUsuario (state) {
         state.usuario = {
@@ -26,12 +29,13 @@ export const store = {
             token: ''
         }
         AxiosService.defaults.headers.common['Authorization'] = ''
-        let keyValue = 'usuario='
-        let now = new Date();
-        now.setTime(now.getTime() - 24 * 60 * 60 * 1000);
-        let expires = 'expires=' + now.toUTCString();
-        let cookieStr = keyValue + ';' + expires;
-        document.cookie = cookieStr;
+        // let keyValue = 'usuario='
+        // let now = new Date();
+        // now.setTime(now.getTime() - 24 * 60 * 60 * 1000);
+        // let expires = 'expires=' + now.toUTCString();
+        // let cookieStr = keyValue + ';' + expires;
+        // document.cookie = cookieStr;
+        localStorage.removeItem('usuario')
       }
     },
     actions: {

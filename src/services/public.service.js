@@ -9,4 +9,8 @@ export default {
         return axios.get(`public/eixos/${id}/projetos`)
     },
 
+    getEstados() {
+        return axios.get(`public/estados`)
+    },
+
 }
