@@ -42,8 +42,8 @@
                                         </td>
                                         <td>
                                             <span
-                                            style="padding: .4rem .8rem !important; border-radius: 4px;"
-                                            :style="{'background-color': row.estado.cor, 'border-color': row.estado.cor}">
+                                            style="font-size: 85%; padding: .4rem .8rem !important; border: 2px solid; font-weight: bold; border-radius: 4px;"
+                                            :style="{'color': row.estado.cor  || red, 'border-color': row.estado.cor  || red}">
                                             {{ row.estado.nome }}
                                             </span>
                                         </td>
@@ -56,12 +56,11 @@
                                 </p>
                                 <br>
                             </div>
-
-                            
                         </div>
                         <br>
                         <div class="col text-center" v-if="projetos.length && !isLoading">
-                            <span v-for="(estado, index) in estados" :key="index">
+                            Legenda: 
+                            <span class="estado" v-for="(estado, index) in estados" :key="index" :style="{'border-color': estado.cor || red}">
                                 {{ estado.nome }}
                             </span>
                         </div>
@@ -86,7 +85,8 @@ export default {
         eixos: [],
         eixoSelecionado: null,
         projetos: [],
-        estados: []
+        estados: [],
+        red: 'unset'
       }
   },
   components: {
@@ -95,7 +95,7 @@ export default {
   methods: {
     carregarProjetos() {
         this.isLoading = true;
-        PublicService.getEixos().then((response) => {
+        PublicService.getEstados().then((response) => {
             this.estados = response.data || [];
             PublicService.getProjetos(this.$route.params.id).then((response) => {
                 this.projetos = response.data;
@@ -120,3 +120,14 @@ export default {
   }
 };
 </script>
+<style lang="css" scoped>
+.estado {
+    font-size: 78%;
+    margin: .1rem .6rem 0px 0px;
+    padding: 2px;
+    border-radius: 4px;
+    border: 1px solid;
+    border-left: 13px solid;
+    height: .5rem;
+}
+</style>

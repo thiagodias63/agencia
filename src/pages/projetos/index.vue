@@ -55,7 +55,7 @@
                   </td>
                   <td>
                     <span
-                      style="padding: .4rem .8rem !important; border-radius: 4px;"
+                      style="padding: .4rem .8rem !important; border-radius: 4px; "
                       :style="{'background-color': row.estado.cor, 'border-color': row.estado.cor}">
                       {{ row.estado.nome }}
                     </span>
