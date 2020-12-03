@@ -36,6 +36,11 @@ export default new Router({
           component: () => import('./pages/eixo.vue'),
         },
         {
+          path: '/projetos/:id',
+          name: 'projetos',
+          component: () => import('./pages/projeto.vue'),
+        },
+        {
           name: 'contatos',
           path: '/contatos',
           component: () => import('./pages/contatos.vue')
