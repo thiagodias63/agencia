@@ -22,6 +22,7 @@
                                         <th>Meta</th>
                                         <th>Gestores</th>
                                         <th>Estado</th>
+                                        <th></th>
                                     </template>
 
                                     <template slot-scope="{ row }">
@@ -46,6 +47,12 @@
                                             :style="{'color': row.estado.cor  || red, 'border-color': row.estado.cor  || red}">
                                             {{ row.estado.nome }}
                                             </span>
+                                        </td>
+                                        <td>
+                                            <router-link  style="font-size: 85%;" :to="`/projetos/${$route.params.id}/detalhes/${row.id}`"
+                                            class="btn btn-primary">
+                                            Detalhes
+                                            </router-link>
                                         </td>
                                     </template>
                                 </base-table>

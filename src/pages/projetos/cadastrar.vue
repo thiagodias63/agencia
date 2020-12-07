@@ -34,13 +34,15 @@
                         </div>
                         <div class="form-group">
                             <label for="meta">Meta:</label>
-                            <input
+                            <textarea
                                 id="meta"
                                 type="text"
                                 class="input-group-alternative mb-3 input-sm form-control"
+                                rows="5"
                                 v-model="projeto.meta"
                                 :disabled="isSending"
                                 :class="{ 'is-invalid': isSubmited && $v.projeto.meta.$invalid}">
+                            </textarea>
                         </div>
                         <div class="form-group">
                             <label for="eixo">Eixo:</label>
@@ -75,7 +77,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="eixo">Funcionarios:</label>
+                            <label for="eixo">Responsáveis:</label>
                             <div class="form-check" v-for="(funcionario, index) in funcionarios" :key="index">
                               <input
                                   :id="index"

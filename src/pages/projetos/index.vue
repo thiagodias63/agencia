@@ -29,7 +29,7 @@
                   <th>Nome</th>
                   <th>Meta</th>
                   <th>Eixo</th>
-                  <th>Gestores</th>
+                  <th>Responsáveis</th>
                   <th>Status</th>
                   <th></th>
                 </template>

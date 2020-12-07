@@ -41,6 +41,11 @@ export default new Router({
           component: () => import('./pages/projeto.vue'),
         },
         {
+          path: '/projetos/:eixo/detalhes/:id',
+          name: 'projetos-detalhes',
+          component: () => import('./pages/macro-acoes.vue'),
+        },
+        {
           name: 'contatos',
           path: '/contatos',
           component: () => import('./pages/contatos.vue')

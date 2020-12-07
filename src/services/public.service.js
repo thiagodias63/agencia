@@ -12,5 +12,4 @@ export default {
     getEstados() {
         return axios.get(`public/estados`)
     },
-
 }
