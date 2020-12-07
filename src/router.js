@@ -87,6 +87,22 @@ export default new Router({
           name: 'index',
           component: () => import('./pages/index.vue')
         },
+        
+        {
+          path: '/admin/projetos/:projeto/macro-acoes',
+          name: 'macro-acoes',
+          component: () => import('./pages/projetos/macro-acoes')
+        },
+        {
+          path: '/admin/projetos/:projeto/macro-acoes/cadastrar',
+          name: 'macro-acoes-cadastrar',
+          component: () => import('./pages/projetos/macro-acoes/cadastrar')
+        },
+        {
+          path: '/admin/projetos/:projeto/macro-acoes/:id',
+          name: 'macros-editar',
+          component: () => import('./pages/projetos/macro-acoes/editar')
+        },
         {
           path: '/admin/projetos',
           name: 'projetos',

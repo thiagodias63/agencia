@@ -1,7 +1,7 @@
 <template>
   <div>
     <base-header type="gradient-success" class="pb-6 pb-8 pt-5 ">
-    <h1 class="title">Projetos</h1>
+    <h1 class="title">Macro Ações do Projeto {{ macros[0] ? ' - ' + macros[0].projeto.nome : '' }} </h1>
     </base-header>
     <div class="container-fluid mt--7">
       <div class="row">
@@ -11,26 +11,26 @@
               <div class="row align-items-center">
                 <div class="col">
                   <h3 class="mb-0">
-                    Lista de Projetos
+                    Lista de Macros
                   </h3>
                 </div>
                 <div class="col text-right">
-                  <router-link class="btn btn-sm btn-primary" to="/admin/projetos/cadastrar">Cadastrar</router-link>
+                  <router-link class="btn btn-sm btn-primary" :to="`/admin/projetos/${projetoId}/macro-acoes/cadastrar`">Cadastrar</router-link>
+                  <router-link class="btn btn-sm btn-default" :to="`/admin/projetos`">Voltar</router-link>
                 </div>
               </div>
             </div>
-            <div v-if="projetos.length && !isLoading" class="table-responsive">
+            <div v-if="macros.length && !isLoading" class="table-responsive">
               <base-table
                 class="table align-items-center table-flush"
                 tbody-classes="list"
-                :data="projetos"
+                :data="macros"
               >
                 <template slot="columns">
                   <th>Nome</th>
-                  <th>Meta</th>
-                  <th>Eixo</th>
-                  <th>Gestores</th>
+                  <th>Prazo</th>
                   <th>Status</th>
+                  <th>Projeto</th>
                   <th></th>
                 </template>
 
@@ -39,19 +39,7 @@
                     {{ row.nome }}
                   </td>
                   <td>
-                    {{ row.meta }}
-                  </td>
-                  <td>
-                    {{ row.eixo.nome }}
-                  </td>
-                  <td>
-                    <span
-                      class="badge badge-default"
-                      style="margin-right: 3px;"
-                      v-for="(funcionario, index) in row.funcionarios"
-                      :key="index">
-                      {{ funcionario.nome }}
-                    </span>
+                    {{ row.prazo_at }}
                   </td>
                   <td>
                     <span
@@ -60,7 +48,9 @@
                       {{ row.estado.nome }}
                     </span>
                   </td>
-
+                  <td>
+                    {{ row.projeto.nome }}
+                  </td>
                   <td class="text-right">
                     <base-dropdown class="dropdown"
                                 position="right">
@@ -68,8 +58,7 @@
                       <i class="fas fa-ellipsis-v"></i>
                     </a>
                       <template>
-                        <router-link :to="`projetos/${row.id}`" class="dropdown-item" href="#">Editar</router-link>
-                        <router-link :to="`projetos/${row.id}/macro-acoes`" class="dropdown-item" href="#">Ver Macro Ações</router-link>
+                        <router-link :to="`macro-acoes/${row.id}`" class="dropdown-item" href="#">Editar</router-link>
                         <button @click="modalRemover(row)" class="dropdown-item" href="#">Remover</button>
                       </template>
                     </base-dropdown>
@@ -78,14 +67,14 @@
                
               </base-table>
             </div>
-            <div class="col text-center" v-if="!projetos.length && !isLoading"> 
+            <div class="col text-center" v-if="!macros.length && !isLoading"> 
                 <p>
                     Nenhum registor encontrado.
                 </p>
                 <br>
             </div>
-            <!-- <div v-if="projetos.length" class="card-footer d-flex justify-content-center">
-                <base-pagination :total="projetos.length"></base-pagination>
+            <!-- <div v-if="macros.length" class="card-footer d-flex justify-content-center">
+                <base-pagination :total="macros.length"></base-pagination>
             </div> -->
             <div v-if="isLoading">
               <app-loader></app-loader>
@@ -96,7 +85,7 @@
     </div>
     <modal :show="isRemoving" @close="fecharModal()">
       <div class="text-center">
-        <p>Remover o projeto: <span style="font-weight: bold">{{ projetoSelecionado.nome }}</span> </p>
+        <p>Remover o projeto: <span style="font-weight: bold">{{ macroSelecionada.nome }}</span> </p>
         <br>
         <button @click="fecharModal" class="btn btn-default btn-sm">Cancelar</button>
         <button @click="confirmarRemocao" class="btn btn-danger btn-sm">Remover</button>
@@ -107,54 +96,60 @@
 
 <script>
 import Loader from '@/components/loader'
-import ProjetoService from '@/services/projetos.service'
+import MacroAcaoService from '@/services/macros.service'
+import dayjs from 'dayjs'
 export default {
-  title: 'Projetos - Lista',
+  title: 'Macros - Lista',
   data() {
     return {
+      projetoId: null,
       isLoading: false,
-      projetos: [],
+      macros: [],
       isRemoving: false,
       isSending: false,
-      projetoSelecionado: {},
+      macroSelecionada: {},
     };
   },
   components: {
     'app-loader': Loader
   },
   methods: {
-    carregarProjetos() {
+    carregarMacros() {
       this.isLoading = true;
-      ProjetoService.getAll().then((response) => {
-        this.projetos = response.data || [];
+      MacroAcaoService.getAll(this.projetoId).then((response) => {
+        this.macros = response.data.map((macro) => {
+          macro.prazo_at = dayjs(macro.prazo_at).format('DD/MM/YYYY')
+          return macro
+        }) || [];
         this.isLoading = false;
       })
     },
     modalRemover(projeto) {
-      this.projetoSelecionado = projeto
+      this.macroSelecionada = projeto
       this.isRemoving = true
     },
     confirmarRemocao() {
       this.isSending = true;
-      ProjetoService.remove(this.projetoSelecionado.id).then(() => {
-        this.projetoSelecionado = {};
+      MacroAcaoService.remove(this.macroSelecionada.id).then(() => {
+        this.macroSelecionada = {};
         this.fecharModal();
-        this.carregarProjetos();
-        this.$toaster.error('Projeto deletado com sucesso!');
+        this.carregarMacros();
+        this.$toaster.error('Mqacro deletado com sucesso!');
         this.isSending = false;
       }).catch((e) => {
         this.isSending = false;
         console.error(e)
-        this.$toaster.error('Erro ao remover projeto!');
+        this.$toaster.error('Erro ao remover marco!');
       })
     },
     fecharModal() {
-      this.projetoSelecionado = {};
+      this.macroSelecionada = {};
       this.isRemoving = false
     }
   },
   created() {
-    this.carregarProjetos();
+    this.projetoId = this.$route.params.projeto
+    this.carregarMacros();
   }
 };
 </script>
